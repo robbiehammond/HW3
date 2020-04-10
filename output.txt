@@ -1,0 +1,5 @@
+The average collision list length, including null spaces, is: 2.3125
+(into : 2) (a : 2) (size : 1) (once : 1) (but : 1) (increase : 2) (cut : 1) (instead : 1) (be : 1) (argument : 1) (in : 2) (symbols : 1) (with : 1) (one : 1) (that : 5) (use : 1) 
+(have : 1) (twice : 1) (still : 1) (least : 1) (i : 1) (words : 2) (for : 1) (larger : 1) (is : 3) (depending : 1) (it : 5) (my : 1) (two : 1) (text : 3) (much : 2) (stated : 1) (an : 1) (however : 1) (make : 1) (hash : 1) (table : 2) (put : 1) 
+(enough : 1) (how : 1) (here : 1) (other : 1) (the : 4) (as : 2) (test : 1) (not : 1) (at : 1) (are : 1) (some : 1) (t : 1) (contain : 1) (directions : 1) (more : 1) (numbers : 1) (get : 1) (might : 1) (and : 1) (of : 1) 
+(does : 1) (has : 2) (type : 1) (even : 1) (aren : 1) (going : 1) (fine : 1) (document : 5) (to : 4) (file : 1) (apostrophes : 1) (random : 1) (this : 5) (toy : 1) (happen : 1) (on : 1) 

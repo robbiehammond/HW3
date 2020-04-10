@@ -1,8 +1,11 @@
+import sun.awt.image.ImageWatched;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Tester {
 
-    static int size = 5;
 
     public static void main(String[] args) throws IOException {
         wordCount("toyfile.txt", "output.txt");

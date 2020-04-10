@@ -29,13 +29,19 @@ public class HashTable {
 
     //add entry to table
     public void add(String word, int freq) {
+
+        if (gettingFull())
+            incSize();
+
         Entry newEntry = new Entry(word, freq);
         //the hashed index
         int index = Math.abs(word.hashCode()) % tableSize;
+        //System.out.println(word + " " + index);
 
         //if there are no other elements at that index, simply put it there
-        if (table[index] == null)
+        if (table[index] == null) {
             table[index] = newEntry;
+        }
 
         //if there is one or more elements, add this element to the end of the list of elements
         else {
@@ -101,12 +107,12 @@ public class HashTable {
             //if there is something at this index, write what it is
             if (table[i] != null) {
                 Entry curEntry = table[i];
-                writer.write("(" + escapeSpecialCharacter(curEntry.word) + " : " + curEntry.frequency + ") ");
+                writer.write("(" + curEntry.word + " : " + curEntry.frequency + ") ");
 
                 //if this bucket has more than one element, print those
                 while (curEntry.next != null) {
                     curEntry = curEntry.next;
-                    writer.write("(" + escapeSpecialCharacter(curEntry.word) + " : " + curEntry.frequency + ") ");
+                    writer.write("(" + curEntry.word + " : " + curEntry.frequency + ") ");
                 }
             }
         }
@@ -114,7 +120,7 @@ public class HashTable {
     }
 
     //increases the table size
-    public void incSize() {
+    private void incSize() {
         //save old table, adjust table size
         Entry[] oldTable = table;
         tableSize *= 2;
@@ -128,14 +134,20 @@ public class HashTable {
             if (oldTable[i] != null) {
 
                 //add to new table by rehashing each element so they go to the appropriate index
-                add(oldTable[i].word, oldTable[i].frequency);
+                Entry pointer = oldTable[i];
+                add(pointer.word, pointer.frequency);
+
+                //if the bucket at this index has multiple elements, rehash and add all of those too
+                while (pointer.next != null) {
+                    pointer = pointer.next;
+                    add(pointer.word, pointer.frequency);
+                }
             }
         }
     }
 
     //prints the average collision length
     public String tableStats() {
-
         //total number of elements in the table
         int counter = 0;
 
@@ -157,23 +169,34 @@ public class HashTable {
         return "The average collision list length, including null spaces, is: " + (double)counter / (double)tableSize;
     }
 
-    //
+    //method to check if the hash table should be expanded
     public boolean gettingFull() {
         int counter = 0;
+
+        //iterate over table array, not going into the buckets
         for (int i = 0; i < table.length; i++) {
+
+            //count how many buckets have at least one item
             if (table[i] != null)
                 counter++;
         }
+        //if more than 95% of the indexes have at least one element, return true. Otherwise, return false
         return counter > .95 * tableSize ;
     }
 
 
-    //can be used to see the entire table, with null spaces included
+    //can be used to see the entire table, with null spaces included - primarily just used for testing sake
     public void printTableWithNulls() {
+
+        //iterate over table
         for (int i = 0; i < table.length; i++) {
+
+            //if there's at least one element in the bucket, print it
             if (table[i] != null) {
                 Entry curEntry = table[i];
                 System.out.println(curEntry.word + " : " + curEntry.frequency);
+
+                //print remainder of bucket, if there are other elements
                 while (curEntry.next != null) {
                     curEntry = curEntry.next;
                     System.out.println(curEntry.word + " : " + curEntry.frequency);
@@ -182,15 +205,5 @@ public class HashTable {
             else
                 System.out.println("null");
         }
-    }
-
-    //Yuchen's method to format special characters
-    public static String escapeSpecialCharacter(String x) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : x.toCharArray()) {
-            if (c >= 32 && c < 127) sb.append(c);
-            else sb.append(" [0x" + Integer.toOctalString(c) + "]");
-        }
-        return sb.toString();
     }
 }

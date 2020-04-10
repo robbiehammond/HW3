@@ -58,9 +58,6 @@ public class WordScanner {
         //iterate over all of the words in document
         for (String s : wordList) {
 
-            //see if size needs to be increased before adding
-            if (hash.gettingFull())
-                hash.incSize();
 
             //add only the words not currently in the table
             if (!hash.inTable(s))  {
