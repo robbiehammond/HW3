@@ -1,0 +1,5 @@
+This is a document. This document has text in it. This document is my "toy" file. It does not have that much text.
+However, it has enough text to make the hash table increase in size at least once. Depending on how much more I type,
+it might even increase twice. Here are some random symbols and numbers that aren't going to be put into the
+table: @#)!^#*^$12312312. Words that contain apostrophes still get cut into two words, as the directions stated that
+it is fine for that to happen. But, to see this work with a larger document, refer other output instead of this one.
